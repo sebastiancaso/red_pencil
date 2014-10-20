@@ -71,11 +71,23 @@ describe Item do
 			@dealer.change_price(1,9)
 			expect(@item.valid_promotion_length?).to eq(true)
 		end 
+		it 'should return false if promotion length is more than 30 days' do 		
+			@dealer.change_price(1,9)
+			@item.current_price_date = DateTime.now - 30
+			expect(@item.valid_promotion_length?).to eq(false)
+		end
 	end 
 
 	describe '#red_pencil_promotion?' do 
 		it 'should recognize an invalid red_pencil_promotion' do 			
 			expect(@item.red_pencil_promotion?).to eq(false)
+		end 
+	  
+
+		it 'should recognize a valid red_pencil_promotion' do  
+			@dealer.change_price(1, 8.4)
+			@item.current_price_date = DateTime.now + 30 
+			expect(@item.red_pencil_promotion?).to eq(true)	 
 		end 
 	end 
 end  
