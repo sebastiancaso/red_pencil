@@ -63,6 +63,4 @@ class Item #maybe change name to product?
 
 end 
 
-
-#TODO 
-#test promotion length 
+ 
